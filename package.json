@@ -1,0 +1,14 @@
+{
+  "name": "@jakub-g/html-streaming-parser-test",
+  "private": true,
+  "version": "0.0.0",
+  "description": "HTML streaming parser test",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "author": "Jakub Gieryluk <jakub.gieryluk@dailymotion.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

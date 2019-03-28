@@ -1,0 +1,1 @@
+HTML streaming parser test
