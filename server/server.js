@@ -1,7 +1,7 @@
 const http = require('http')
 const express = require('express')
 
-const HTTP_PORT = 7007
+const HTTP_PORT = process.env.PORT || process.argv[2] || 7007
 
 // create server
 const app = express()
@@ -12,6 +12,7 @@ app.get('/', function resetHandler(req, res) {
       <h1>Streaming HTML parser demo (looks like it's Chrome only)...</h1>
       <p>responseStart</p>
       <script>window._scriptStartTime = performance.now()</script>`)
+
     setTimeout(function() {
       res.write(`<p>responseEnd</p>
         <script>
