@@ -8,11 +8,14 @@ const app = express()
 
 app.get('/', function resetHandler(req, res) {
     res.write(`<!doctype html>
+      <head>
+        <script>window._scriptStartTime = performance.now()</script>
+      </head>
       <body bgcolor=yellow>
       <h1>Streaming HTML parser demo (looks like it's Chrome only)</h1>
       <p>If this page loads first yellow, then turns lime, streaming parser is working really well.<br>
          If the first paint you see is lime, it means HTML is only rendered on screen after responseEnd.</p>
-      <script>window._scriptStartTime = performance.now()</script>
+      <p>See the code <a href="https://github.com/jakub-g/html-streaming-parser-test/blob/master/server/server.js">here</a></p>
       <p>responseStart...
     `)
 
