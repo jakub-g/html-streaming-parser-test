@@ -16,14 +16,14 @@ app.get('/', function resetHandler(req, res) {
       <p>If:
         <br>1) this page loads first yellow, then turns lime, and
         <br>2) scriptStart < responseEnd, and
-        <br>3) scriptStart << 3000,
+        <br>3) scriptStart << 3000 (try reloading if first load is slow),
         <br>then the streaming parser is working really well.<br>
          If the first paint you see is lime, it means HTML is only rendered on screen after responseEnd.</p>
       <p>
         See the code <a href="https://github.com/jakub-g/html-streaming-parser-test/blob/master/server/server.js">here</a>
         (the server flushes part of HTML immediately, and the rest after 3000ms delay)
       </p>
-      <p>responseStart...
+      <p>responseStart...<!-- server flush here -->
     `)
 
     setTimeout(function() {
