@@ -9,7 +9,10 @@ const app = express()
 app.get('/', function resetHandler(req, res) {
     res.write(`<!doctype html>
       <head>
-        <script>window._scriptStartTime = performance.now()</script>
+        <script>
+          window._scriptStartTime = performance.now()
+          window._scriptStartTimeLegacy = Date.now()
+        </script>
       </head>
       <body bgcolor=yellow>
       <h1>Streaming HTML parser demo</h1>
@@ -32,10 +35,22 @@ app.get('/', function resetHandler(req, res) {
         <script>
         document.body.style.backgroundColor = 'lime'
         setTimeout(function() {
-          let msg = ''
-          msg += '\\nresponseStart = ' + Math.round(performance.getEntriesByType('navigation')[0].responseStart)
-          msg += '\\nscriptStart   = ' + Math.round(window._scriptStartTime)
-          msg += '\\nresponseEnd    = ' + Math.round(performance.getEntriesByType('navigation')[0].responseEnd)
+          var start, end, script;
+          if (performance.getEntriesByType('navigation').length > 0) {
+            start = Math.round(performance.getEntriesByType('navigation')[0].responseStart)
+            end = Math.round(performance.getEntriesByType('navigation')[0].responseEnd)
+            script = Math.round(window._scriptStartTime)
+          } else {
+            // Safari is the new IE
+            start = performance.timing.responseStart - performance.timing.requestStart
+            end = performance.timing.responseEnd - performance.timing.requestStart
+            script = window._scriptStartTimeLegacy - performance.timing.requestStart
+          }
+          var msg = ''
+
+          msg += '\\nresponseStart = ' + start
+          msg += '\\nscriptStart   = ' + script
+          msg += '\\nresponseEnd    = ' + end
           alert(msg)
         }, 0)
         </script>`)
