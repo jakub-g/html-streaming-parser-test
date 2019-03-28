@@ -12,8 +12,12 @@ app.get('/', function resetHandler(req, res) {
         <script>window._scriptStartTime = performance.now()</script>
       </head>
       <body bgcolor=yellow>
-      <h1>Streaming HTML parser demo (looks like it's Chrome only)</h1>
-      <p>If this page loads first yellow, then turns lime, streaming parser is working really well.<br>
+      <h1>Streaming HTML parser demo</h1>
+      <p>If:
+        <br>1) this page loads first yellow, then turns lime, and
+        <br>2) scriptStart < responseEnd, and
+        <br>3) scriptStart << 3000,
+        <br>then the streaming parser is working really well.<br>
          If the first paint you see is lime, it means HTML is only rendered on screen after responseEnd.</p>
       <p>See the code <a href="https://github.com/jakub-g/html-streaming-parser-test/blob/master/server/server.js">here</a></p>
       <p>responseStart...
