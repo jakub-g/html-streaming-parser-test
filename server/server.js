@@ -19,7 +19,10 @@ app.get('/', function resetHandler(req, res) {
         <br>3) scriptStart << 3000,
         <br>then the streaming parser is working really well.<br>
          If the first paint you see is lime, it means HTML is only rendered on screen after responseEnd.</p>
-      <p>See the code <a href="https://github.com/jakub-g/html-streaming-parser-test/blob/master/server/server.js">here</a></p>
+      <p>
+        See the code <a href="https://github.com/jakub-g/html-streaming-parser-test/blob/master/server/server.js">here</a>
+        (the server flushes part of HTML immediately, and the rest after 3000ms delay)
+      </p>
       <p>responseStart...
     `)
 
@@ -28,7 +31,7 @@ app.get('/', function resetHandler(req, res) {
 
         <script>
         document.body.style.backgroundColor = 'lime'
-        setTimeout(() => {
+        setTimeout(function() {
           let msg = ''
           msg += '\\nresponseStart = ' + Math.round(performance.getEntriesByType('navigation')[0].responseStart)
           msg += '\\nscriptStart   = ' + Math.round(window._scriptStartTime)
